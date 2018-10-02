@@ -54,6 +54,16 @@ if s is None:
     sys.exit(1)
 
 while True:
-    userInput = input('Input Name of File to transport:')
-    fileToTransport = open(userInput, 'r')
+    # Send server User Input
+    userInput = input('Input Name of File to transport: ')
     framedSend(s, b"Filename=" + userInput.encode(), debug)
+    print(framedReceive(s, b"Filename=" + userInput.encode()))
+    # Get file ready to send to server
+    with open(userInput, 'rb') as f:
+        # grab the lines
+        data = f.read()
+        # replaces new line charcters with temp character to signify new line
+        data = data.replace(b'\n', b'@')
+        framedSend(s, data, debug)
+        f.close()
+        # print(framedReceive(s, data + userInput.encode()))

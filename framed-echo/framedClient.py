@@ -8,6 +8,8 @@ import re, params, socket
 
 from framedSock import framedSend, framedReceive
 
+# To use proxy server it means that  we need to use  50000 server
+# 50001 for normal
 switchesVarDefaults = (
     (('-s', '--server'), 'server', "127.0.0.1:50001"),
     (('-d', '--debug'), "debug", False),  # boolean (set if present)
@@ -57,7 +59,7 @@ while True:
     # Send server User Input
     userInput = input('Input Name of File to transport: ')
     framedSend(s, b"Filename=" + userInput.encode(), debug)
-    print(framedReceive(s, b"Filename=" + userInput.encode()))
+    # print(framedReceive(s, b"Filename=" + userInput.encode()))
     # Get file ready to send to server
     with open(userInput, 'rb') as f:
         # grab the lines
@@ -66,4 +68,16 @@ while True:
         data = data.replace(b'\n', b'@')
         framedSend(s, data, debug)
         f.close()
-        # print(framedReceive(s, data + userInput.encode()))
+        print(framedReceive(s, data + userInput.encode()))
+
+        while len(data) >= 100:
+            # grab every 100 bites
+            firstHalf = data[:100]
+            data = data[100:]
+            # Send first half
+            framedSend(s, firstHalf, debug)
+            print(framedReceive(s, b"FirstPart" + firstHalf + userInput.encode()))
+
+            if len(data) > 0:
+                framedSend(s, data, debug)
+                print(framedReceive(s, b"Rest" + data + userInput.encode()))

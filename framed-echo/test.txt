@@ -1,16 +1,7 @@
-hsadkbabdlabdlabdlkasndlkasncsacnacblasbcjsac
-ackaslcnaslkcnalkcnaslkn
-asdbsadsakdnsakdnksanlsa
-sldalsdlsakdp
-asldalkdlsakdlaksad
-alsdlaskdlsandknsaldnlsaknda
-salmdakdmlaksnda
-asdmas;ndiwdiuqdkbqwkj
-aasdlandlkasndaskdnsaina
-akdsnlsandusagduwgd
-askdlajdla
-akdhalhdahsdusahduwqhpdqj
-aasdlkajdlksajlajdlasjdalq
-kajsdajdlasjdlkjsadlkjalkdj
-askdjksajdlksajdlksajdlksajdlkajdla
-akjdlsajdlkajdlkajsdlka
+There are no shortcuts to creating immersive experiences that are believable to the human mind.
+VR requires complex scenes rendered at very high framerates.
+Because Unreal Engine is designed for demanding applications such as AAA games, filmmaking and photoreal visualization, it meets these requirements and provides a solid foundation to build content on all VR platforms
+From PC to console to mobile.
+Increasingly powerful devices can take advantage of increasingly powerful technology.
+With features like dynamic shadows, physically-based rendering and custom post-processing
+Unreal powers the most cutting-edge gaming experiences on mobile.

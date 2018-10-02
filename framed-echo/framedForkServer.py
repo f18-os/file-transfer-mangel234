@@ -1,15 +1,15 @@
 #! /usr/bin/env python3
+import os
+import sys
 
-sys.path.append("../lib")       # for params
-
-import sys, os, socket, params
-
+sys.path.append("../lib")  # for params
+import re, socket, params
 
 switchesVarDefaults = (
-    (('-l', '--listenPort') ,'listenPort', 50001),
-    (('-d', '--debug'), "debug", False), # boolean (set if present)
-    (('-?', '--usage'), "usage", False), # boolean (set if present)
-    )
+    (('-l', '--listenPort'), 'listenPort', 50001),
+    (('-d', '--debug'), "debug", False),  # boolean (set if present)
+    (('-?', '--usage'), "usage", False),  # boolean (set if present)
+)
 
 progname = "echoserver"
 paramMap = params.parseParams(switchesVarDefaults)
@@ -19,7 +19,7 @@ debug, listenPort = paramMap['debug'], paramMap['listenPort']
 if paramMap['usage']:
     params.usage()
 
-lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # listener socket
+lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # listener socket
 bindAddr = ("127.0.0.1", listenPort)
 lsock.bind(bindAddr)
 lsock.listen(5)
@@ -38,5 +38,10 @@ while True:
             if not payload:
                 if debug: print("child exiting")
                 sys.exit(0)
-            payload += b"!"             # make emphatic!
+            payload += b"!"  # make emphatic!
             framedSend(sock, payload, debug)
+
+    userInput = input('Input Name of File to transport:')
+    fileToTransport = open(userInput, 'r')
+    framedSend(sock, b"Filename=" + userInput.encode(), debug)
+    print('Received' + framedSend, debug)

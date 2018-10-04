@@ -8,7 +8,7 @@ import re, params, socket
 
 from framedSock import framedSend, framedReceive
 
-# To use proxy server it means that  we need to use  50000 server
+# To use proxy server it means that  we need to use  5000z10 server
 # 50001 for normal
 switchesVarDefaults = (
     (('-s', '--server'), 'server', "127.0.0.1:50001"),

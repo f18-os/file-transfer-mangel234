@@ -32,16 +32,12 @@ while True:
 
     if not os.fork():
         print("new child process handling connection from", addr)
+        # This is where the server waits for the header and new data to read
         while True:
+            # Data comes out with new lines being represented by the @ sign
+            header = framedReceive(sock, debug)
             payload = framedReceive(sock, debug)
-            if debug: print("rec'd: ", payload)
-            if not payload:
-                if debug: print("child exiting")
-                sys.exit(0)
-            payload += b"!"  # make emphatic!
-            framedSend(sock, payload, debug)
-
-    userInput = input('Input Name of File to transport:')
-    fileToTransport = open(userInput, 'r')
-    framedSend(sock, b"Filename=" + userInput.encode(), debug)
-    print('Received' + framedSend, debug)
+            # basically decodes the b
+            newFile = open(b'NewTest:' + header, 'wb')
+            newFile.write(payload)
+            newFile.close()

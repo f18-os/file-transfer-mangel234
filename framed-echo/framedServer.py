@@ -31,9 +31,11 @@ print("connection rec'd from", addr)
 from framedSock import framedSend, framedReceive
 
 while True:
-    payload = framedReceive(sock, debug)
-    if debug: print("rec'd: ", payload)
-    if not payload:
-        break
-    payload += b"!"  # make emphatic!
-    framedSend(sock, payload, debug)
+    header = framedReceive(sock, debug)
+    payload = framedReceive(sock,debug)
+    # basically decodes the b 
+    newFile = open(b'NewTest:'+header, 'wb')
+    newFile.write(payload)
+    newFile.close()
+
+
